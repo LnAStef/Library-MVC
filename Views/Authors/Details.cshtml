@@ -1,0 +1,49 @@
+﻿@model Library_MVC.Models.Author
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Author</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+
+<br />
+
+
+
+<h4>List of Books written by the author @Model.Name: </h4>
+
+<ul>
+    @foreach (Library_MVC.Models.Book book in Model.books)
+    {
+
+        <li>
+            <a href="/Books/Details/@book.Id">@book.Title</a>
+        </li>
+
+    }
+</ul>
+
+<br />
+
+<p>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Librarian"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AuthorId })
+    }|
+    @Html.ActionLink("Back to List", "Index")
+</p>

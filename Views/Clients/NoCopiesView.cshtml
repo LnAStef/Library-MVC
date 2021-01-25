@@ -1,0 +1,16 @@
+﻿@model Library_MVC.Models.Book
+
+@{
+    ViewBag.Title = "NoCopiesView";
+}
+
+<h3>Unfortunately, currently there are no available copies of the book @Model.Title.</h3>
+
+<div>
+    Please consider choosing another book.
+</div>
+
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

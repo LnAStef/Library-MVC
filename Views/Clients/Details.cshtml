@@ -1,0 +1,121 @@
+﻿@model Library_MVC.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h5>Client</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LibraryCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibraryCard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PackageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PackageType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+
+<h4>List of Books that the client currently holds: </h4>
+
+<ul>
+    @foreach (Library_MVC.Models.Book book in Model.books)
+    {
+
+        <li>
+            <a href="/Books/Details/@book.Id">@book.Title</a>
+        </li>
+
+    }
+</ul>
+
+<br />
+
+@if (User.IsInRole("Administrator") || User.IsInRole("Librarian"))
+{
+
+    <h4>History of Borrowed Books for the client: </h4>
+
+<ul>
+    @foreach (Library_MVC.Models.Book book in Model.borrowedBooks)
+    {
+
+        <li>
+            <a href="/Books/Details/@book.Id">@book.Title</a>
+        </li>
+
+    }
+</ul>
+
+<br />
+}
+
+<p>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Librarian")) {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId })
+    }|
+    @Html.ActionLink("Back to List", "Index")
+</p>
